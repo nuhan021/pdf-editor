@@ -39,7 +39,7 @@ This project follows the **MVC (Model-View-Controller)** pattern combined with *
 ### 2. Installation
 ```bash
 # Clone the repository
-git clone [https://github.com/yourusername/pdf_editor.git](https://github.com/yourusername/pdf_editor.git)
+git clone https://github.com/nuhan021/pdf-editor.git
 
 # Navigate to the project directory
 cd pdf_editor
