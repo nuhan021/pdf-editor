@@ -105,6 +105,18 @@ class EditorController extends GetxController {
     });
   }
 
+  void addCheckbox() {
+    textDraggableFields.add({
+      'id': const Uuid().v4(),
+      'isChecked': false,
+      'x': 150.0,
+      'y': 200.0,
+      'isVisible': true,
+      'type': 'checkbox',
+      'pageIndex': currentPageIndex.value,
+    });
+  }
+
   void updateSignatureImage(int index, Uint8List bytes) {
     textDraggableFields[index]['signature'] = base64Encode(bytes);
     textDraggableFields[index]['text'] = '';
@@ -238,20 +250,28 @@ class EditorController extends GetxController {
         double finalPdfY = field['y'] * scaleY;
         int pageIdx = field['pageIndex'] ?? 0;
 
-        if (field['type'] == 'signature' &&
-            field['signature'] != null &&
-            field['signature'].toString().isNotEmpty) {
-          final Uint8List signatureBytes = base64Decode(
-            field['signature'].toString(),
-          );
-
+        if (field['type'] == 'signature' && field['signature']?.isNotEmpty == true) {
+          final Uint8List signatureBytes = base64Decode(field['signature'].toString());
           document.pages[pageIdx].graphics.drawImage(
             PdfBitmap(signatureBytes),
             Rect.fromLTWH(finalPdfX + 10, finalPdfY + 20, 100, 50),
           );
-        } else {
+        }
+        else if (field['type'] == 'checkbox') {
+          document.pages[pageIdx].graphics.drawRectangle(
+            pen: PdfPen(PdfColor(0, 0, 0), width: 1),
+            bounds: Rect.fromLTWH(finalPdfX + 10, finalPdfY + 20, 20, 20),
+          );
+          if (field['isChecked'] == true) {
+            document.pages[pageIdx].graphics.drawString(
+              'X', PdfStandardFont(PdfFontFamily.helvetica, 14, style: PdfFontStyle.bold),
+              bounds: Rect.fromLTWH(finalPdfX + 14, finalPdfY + 22, 20, 20),
+            );
+          }
+        }
+        else {
           document.pages[pageIdx].graphics.drawString(
-            field['text'],
+            field['text'] ?? "",
             PdfStandardFont(PdfFontFamily.helvetica, 14),
             brush: PdfSolidBrush(PdfColor(0, 0, 0)),
             bounds: Rect.fromLTWH(finalPdfX + 10, finalPdfY + 20, 200, 50),

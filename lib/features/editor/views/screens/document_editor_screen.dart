@@ -4,11 +4,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:pdf_editor/core/common/styles/global_text_style.dart';
 import 'package:pdf_editor/core/utils/logging/logger.dart';
 import 'package:signature/signature.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 import 'package:pdf_editor/features/editor/controller/editor_controller.dart';
 import '../../model/draggable_field.dart';
+import '../widgets/dragable_check_box_field.dart';
 import '../widgets/dragable_date_field.dart';
 import '../widgets/dragable_signature_field.dart';
 import '../widgets/dragable_text_field.dart';
@@ -36,6 +38,7 @@ class DocumentEditorScreen extends StatelessWidget {
                     controller: linkController,
                     decoration: InputDecoration(
                       hintText: "Paste your pe-app://config/ID link here",
+                      hintStyle: getTextStyle(fontSize: 12.sp, fontWeight: FontWeight.w400, color: Colors.grey),
                       border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
                       prefixIcon: const Icon(Icons.link),
                     ),
@@ -82,6 +85,11 @@ class DocumentEditorScreen extends StatelessWidget {
               controller.addSignatureBox();
             },
             icon: Icon(CupertinoIcons.signature),
+          ),
+
+          IconButton(
+            onPressed: () => controller.addCheckbox(),
+            icon: const Icon(Icons.check_box_outlined),
           ),
 
           IconButton(
@@ -163,6 +171,19 @@ class DocumentEditorScreen extends StatelessWidget {
                             onDrag: (idx, dx, dy) => controller.updateFieldPosition(idx, dx, dy),
                             onSignatureAdded: (idx, bytes) => controller.updateSignatureImage(idx, bytes),
                             onDelete: () => controller.textDraggableFields.removeAt(index),
+                          );
+                        }
+
+                        if (field['type'] == 'checkbox') {
+                          return DraggableCheckboxField(
+                            index: index,
+                            field: field,
+                            onDrag: (idx, dx, dy) => controller.updateFieldPosition(idx, dx, dy),
+                            onDelete: () => controller.textDraggableFields.removeAt(index),
+                            onToggle: (idx, val) {
+                              controller.textDraggableFields[idx]['isChecked'] = val;
+                              controller.textDraggableFields.refresh();
+                            },
                           );
                         }
                         return DraggableTextField(
