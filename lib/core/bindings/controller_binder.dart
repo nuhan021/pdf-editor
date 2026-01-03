@@ -1,0 +1,51 @@
+
+
+import 'package:get/get.dart';
+import 'package:pdf_editor/features/auth/controller/login_controller.dart';
+import 'package:pdf_editor/features/auth/controller/sign_up_controller.dart';
+import 'package:pdf_editor/features/auth/service/auth_service.dart';
+import 'package:pdf_editor/features/home/controller/upload_controller.dart';
+import 'package:pdf_editor/features/home/service/file_service.dart';
+
+import '../../features/editor/controller/editor_controller.dart';
+import '../../features/editor/service/document_service.dart';
+
+class ControllerBinder extends Bindings {
+  @override
+  void dependencies() {
+    Get.lazyPut<AuthService>(
+          () => AuthService(),
+      fenix: true,
+    );
+
+    Get.lazyPut<FileService>(
+          () => FileService(),
+      fenix: true,
+    );
+
+    Get.lazyPut<LoginController>(
+          () => LoginController(),
+    );
+
+    Get.lazyPut<SignupController>(
+          () => SignupController(),
+      fenix: true,
+    );
+
+    Get.lazyPut<UploadController>(
+          () => UploadController(),
+      fenix: true,
+    );
+
+    Get.lazyPut<EditorController>(
+          () => EditorController(),
+      fenix: true,
+    );
+
+    Get.lazyPut<DocumentService>(
+          () => DocumentService(),
+      fenix: true,
+    );
+
+  }
+}
