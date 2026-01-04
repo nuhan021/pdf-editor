@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:248987056792:android:6988b9788fe6d92a6eeeed",
+        "mobilesdk_app_id": "1:248987056792:android:fa9c351840174f926eeeed",
         "android_client_info": {
-          "package_name": "com.example.pdf_editor"
+          "package_name": "com.nuhan.pdfeditor"
         }
       },
       "oauth_client": [],

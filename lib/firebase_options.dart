@@ -17,7 +17,10 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      return web;
+      throw UnsupportedError(
+        'DefaultFirebaseOptions have not been configured for web - '
+        'you can reconfigure this by running the FlutterFire CLI again.',
+      );
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -46,18 +49,9 @@ class DefaultFirebaseOptions {
     }
   }
 
-  static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyBOo-Q5gBzi3dVFm4boCRccbyhkpG_sYrA',
-    appId: '1:248987056792:web:144b17eba0cded9b6eeeed',
-    messagingSenderId: '248987056792',
-    projectId: 'pdf-editor-e3a78',
-    authDomain: 'pdf-editor-e3a78.firebaseapp.com',
-    storageBucket: 'pdf-editor-e3a78.firebasestorage.app',
-  );
-
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyDzSQ9Rd0sl6dRxbYfXQlp7jtF5_SpQ43g',
-    appId: '1:248987056792:android:6988b9788fe6d92a6eeeed',
+    appId: '1:248987056792:android:fa9c351840174f926eeeed',
     messagingSenderId: '248987056792',
     projectId: 'pdf-editor-e3a78',
     storageBucket: 'pdf-editor-e3a78.firebasestorage.app',
@@ -65,10 +59,10 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyD9HzRydyagIXHzEtw7cO73U6ysxQq_Wrs',
-    appId: '1:248987056792:ios:9af48152bc99ca906eeeed',
+    appId: '1:248987056792:ios:1bb46f5c223c58ae6eeeed',
     messagingSenderId: '248987056792',
     projectId: 'pdf-editor-e3a78',
     storageBucket: 'pdf-editor-e3a78.firebasestorage.app',
-    iosBundleId: 'com.example.pdfEditor',
+    iosBundleId: 'com.nuhan.pdfeditor',
   );
 }
