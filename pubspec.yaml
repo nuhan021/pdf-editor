@@ -67,12 +67,29 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
+  flutter_native_splash: ^2.4.4
+  flutter_launcher_icons: "^0.13.1"
   flutter_lints: ^5.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
 # The following section is specific to Flutter packages.
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/icon/logo.png"
+  adaptive_icon_background: "#FFFFFF"
+  adaptive_icon_foreground: "assets/icon/logo.png"
+
+flutter_native_splash:
+  color: "#ffffff"
+  image: assets/icon/logo.png
+
+  android_12:
+    image: assets/icon/logo.png
+    color: "#ffffff"
+
 flutter:
 
   # The following line ensures that the Material Icons font is
